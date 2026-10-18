@@ -1,0 +1,19 @@
+name: Build Unity iOS
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build for iOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Extract Project ZIP
+        run: unzip OriginalGame.zip -d extracted
+
+      - name: List files to verify
+        run: ls -R extracted
