@@ -1,12 +1,12 @@
 name: Build Unity iOS
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
 
 jobs:
   build:
-    name: Build for iOS
     runs-on: macos-latest
     steps:
       - name: Checkout Repository
@@ -14,10 +14,3 @@ jobs:
 
       - name: Extract Project ZIP
         run: unzip OriginalGame.zip -d extracted
-
-      - name: Build iOS Project
-        run: |
-          echo "Building Unity project for iOS..."
-          # سيقوم هذا الجزء بمعالجة حزمة المشروع وتحويله لملف IPA للآيفون
-          mkdir -p build/ios
-          echo "Unity build simulation completed successfully."
