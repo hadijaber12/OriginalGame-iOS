@@ -13,4 +13,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Extract Project ZIP
-        run: unzip OriginalGame.zip -d extracted
+        run: |
+          unzip OriginalGame.zip -d extracted
+          mkdir -p build_output
+          cd extracted
+          zip -r ../build_output/OriginalGame.ipa .
+
+      - name: Upload IPA Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: OriginalGame-IPA
+          path: build_output/OriginalGame.ipa
