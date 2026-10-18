@@ -12,12 +12,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Prepare Correct IPA Structure
+      - name: Prepare Proper IPA Structure
         run: |
           unzip OriginalGame.zip -d extracted
           mkdir -p Payload
-          # نقل مجلد اللعبة أو محتوياته لداخل مجلد Payload
-          cp -R extracted/* Payload/
+          # البحث عن ملف .app الناتج من يونيتي ونقله مباشرة داخل Payload
+          find extracted -name "*.app" -exec cp -R {} Payload/ \;
           zip -r OriginalGame.ipa Payload
 
       - name: Upload IPA Artifact
