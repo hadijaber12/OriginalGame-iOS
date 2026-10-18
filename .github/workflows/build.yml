@@ -12,15 +12,16 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Extract Project ZIP
+      - name: Prepare Correct IPA Structure
         run: |
           unzip OriginalGame.zip -d extracted
-          mkdir -p build_output
-          cd extracted
-          zip -r ../build_output/OriginalGame.ipa .
+          mkdir -p Payload
+          # نقل مجلد اللعبة أو محتوياته لداخل مجلد Payload
+          cp -R extracted/* Payload/
+          zip -r OriginalGame.ipa Payload
 
       - name: Upload IPA Artifact
         uses: actions/upload-artifact@v4
         with:
           name: OriginalGame-IPA
-          path: build_output/OriginalGame.ipa
+          path: OriginalGame.ipa
